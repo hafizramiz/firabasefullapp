@@ -1,0 +1,8 @@
+TextTheme class'in ozelliklerini bil. Projede bunlari kullan
+ColorSheme classini arastir. Projede bunlari kullan
+Widgetlara bak.
+Iki katmanimiz var
+1. Front End
+2. Back End
+Native'de firebase mantikli degildir.
+FullText search firebase de yoktur, Yani r yazarsam r ile baslayan gelsin
