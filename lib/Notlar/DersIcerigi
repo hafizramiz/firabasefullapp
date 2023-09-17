@@ -6,3 +6,29 @@ Iki katmanimiz var
 2. Back End
 Native'de firebase mantikli degildir.
 FullText search firebase de yoktur, Yani r yazarsam r ile baslayan gelsin
+
+KATMAN OLUSTURMA
+core ->
+feature ->
+        home
+        login
+              login view
+
+        profil
+product
+        services
+        models
+dart export paketini kur
+
+Paketeri ekle
+easy localization
+riverpod paketi
+kartal
+flutter lint
+very_good analysis
+00000000000000000000000000000000000000000
+constantlari olustur
+
+
+
+
