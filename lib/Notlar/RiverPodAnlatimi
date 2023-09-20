@@ -1,0 +1,81 @@
+Riverpo daha kullanislidir.
+Diyelim ki sayac degerini biz her seferinde 0 olarak kabul edip onu artiriyoruz. Ama biz oncesinde
+ekran daha acilmadan git internetten bir yerden sayac degerini oku ondan sinra kullanici
+artidika onu artir diyebiliriz. Riverpod bize bunu dah sagliyor.
+Bu kullanildiginda Service Locator, InheridetWidget, Dependency Injection' a gerek kalmaz
+Provider'a final olarak tanimla
+MyApp widgetini ProviderScope ile sarmala
+Basit bir veriyi(Orn:int, String, Kendi service sinifimiz)
+Widget agacina yaymak istersek Provider kullaniriz. Yani Riverpodun Provider'i
+Provider ilgili yeri dinlemez. Sadece elde eder.Degisiklik oldugunda UI tarafinda degisiklik yaptirip
+ekrani rebuild etmez
+StateProvider ise dinler. State degistiginde ekrani rebuild eder.
+FutureProvider: Firebase'den veriyi cektim. Tum agaca salmam gerek/ O zaman bunu kullan
+Anlik bir degisiklik gerekiyorsa state'de o zaman streamProvider kullan
+StateNotifierProvider kullan komplex yapida
+
+
+// Bu degiskeni butun siniflardan bagimsiz en ust tarafta tanimladim.Global tanimlamam gerekiyor.
+final myVar=Provider<String>((ref)=>"Deneme String");
+
+ref ile olusturdugumuz state'e erisiriz. State'e erismek icin de ref.wtch yazariz.
+
+
+
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final myVar = Provider<String>((ref) => "Deneme String");
+final myVar1=Provider<String>((ref){
+  return " Ikinci String";
+});
+
+void main() {
+  runApp(const ProviderScope(child: MyApp()));
+}
+ .
+ .
+ .
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Consumer(
+            builder: (BuildContext context, ref, child) {
+              final String stringDeger=ref.watch(myVar);
+              return Text("${stringDeger}");
+            },
+          ),
+          MyTextWidget()
+        ],
+      ),
+    );
+  }
+}
+
+
+/// Bask bir provider'i ConsumerWidget 'tan extend ettim. Bunun build metotu WidgetRef diye bir paramerte istiyor.
+class MyTextWidget extends ConsumerWidget {
+  const MyTextWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Text("${ref.watch(myVar1)}");
+  }
+}
+
+Provider ile getit tin yaptigi isi de yapabilirim. Yani service sinifini widget agacina enjekte edbilirim
+Ama state degismesi gerekirse bu provider isimize yazamaz. Cunku dinleme mekanizmasi yoktur. Yani Ui degismez.
+
