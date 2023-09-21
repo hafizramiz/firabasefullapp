@@ -1,0 +1,49 @@
+FutureProvider kullanirken eger parametre gecmek istersek .family kullaniyoruz
+
+ Bu provider Configuration diye bir model dondurecek. Onu da decode etmis. orasini biliyoruz.
+ Sonucta Configuration modelini donduruyor burda.
+final configProvider = FutureProvider<Configuration>((ref) async {
+  final content = json.decode(
+    await rootBundle.loadString('assets/configurations.json'),
+  ) as Map<String, Object?>;
+
+  return Configuration.fromJson(content);
+});
+
+
+Simdi UI tarafinda da boyle dinliyoruz.
+
+Widget build(BuildContext context, WidgetRef ref) {
+  AsyncValue<Configuration> config = ref.watch(configProvider);
+
+  return config.when(
+    loading: () => const CircularProgressIndicator(),
+    error: (err, stack) => Text('Error: $err'),
+    data: (config) {
+      return Text(config.host);
+      /// Burda datanin gelmesi durumu var.
+    },
+  );
+}
+
+// Simdi burda FutureProvider bir parametre almadan bize veriyi sagladi. Peki paramterye ozel bir veri
+getirmek istersek ne olcak. Bu provider'a paramteryei nasil veririz. Orda da .family kullaniyiruz.
+Yani soyle olcak:    FutureProvider.family
+ Ornegi iste burda var. Burdaki String olan id bir disardan alinan parametredir.
+final messagesFamily = FutureProvider.family<Message, String>((ref, id) async {
+  return dio.get('http://my_api.dev/messages/$id');
+  dio da parametrey map seklinde de verebiliriz.
+});
+
+Parameter restrictions Bolumu
+.family'e sadece bir tane parametre gecebilirsin. Birden fazla gecmek istersen bunu Model icinde ve ya Map icinde
+yani referans tipli bir sinifta gondermen gerekir.
+Bir tane parametre gecmelsin ve bu Primitive data type olmali. Eger primitive olmayan referans tipli bir
+parametre gecersen bunu immutable yapman gerekiyor. Yoksa hata alirsin.
+
+EGER PARAMETRE CONSTANT DEGILSE  AUTOSIDISPOSE KULLAN
+final characters = FutureProvider.autoDispose.family<List<Character>, String>((ref, filter) async {
+  return fetchCharacters(filter: filter);
+});
+
+KeepAlive kullanimi

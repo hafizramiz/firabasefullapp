@@ -1,28 +1,15 @@
-import 'package:firebasefullapp/stateNotifierOrnek.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebasefullapp/feature/home/home_view.dart';
+import 'package:firebasefullapp/feature/splash/splash_view.dart';
+import 'package:firebasefullapp/product/init/app_init.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'counter_model.dart';
-// Provider'e tek bir defa dinlemek sonra dinlemek istemezsem o zamanda ref.read diyoruz.
+import 'firebase_options.dart';
 
-final myVar = Provider<String>((ref) => "Deneme String");
-final myVar1 = Provider<String>((ref) {
-  return " Ikinci String";
-});
-
-final stateProviderVar = StateProvider((ref) {
-  // ref deyince aklimiza gelmesi gereken: Baska providerlara erismek icin gerekli olan aractir.
-  // burda baska provideri okuyabilirim.
-  // Onceki soyledigimizi tasdikler niteliktedir. Yani bir veriyi elde ederken baska bir
-  // state'de erisip onu da kullanmamiz gerekebilir. Bu durumda ref bize fayda saglar.
-// Burda farkli bir provider'dan okudum ve istedigim degisiklikleri yapip ekrana verebilirim.
-  var title = ref.watch(myVar);
-  return title + "diyelim ki ilgili state'e bunu da eklemek istedim.";
-});
-
-final stateProviderVar2 = StateProvider<int>((ref) => 0);
-
-void main() {
+void main() async {
+ await AppInit.initApp();
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -32,75 +19,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyHomePage(),
+      home: MyHomepage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class MyHomepage extends StatefulWidget {
+  const MyHomepage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyHomepage> createState() => _MyHomepageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomepageState extends State<MyHomepage> {
   @override
   Widget build(BuildContext context) {
-    print("Build calisti: my home page");
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Consumer(
-            builder: (BuildContext context, ref, child) {
-              final String stringDeger = ref.watch(myVar);
-              return Text("${stringDeger}");
-            },
-          ),
-          MyTextWidget(),
-          MyCounter()
-        ],
-      ),
-    );
-  }
-}
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    CollectionReference users = firestore.collection('users');
 
-class MyCounter extends ConsumerWidget {
-  const MyCounter({
-    super.key,
-  });
+     print("elde ettigim  collref: ${users.runtimeType}");
 
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    print("Build calisti: my Counter");
-
-    Counter sayac = ref.watch(counterStateNotifierProvider);
-    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Text("Counter degeri: ${sayac.counter}"),
-      ElevatedButton(
-          onPressed: () {
-            print("Butona tiklandi");
-            // Butona tiklandiginda state'i yani counter degiskenini degistirmek istiyorum.
-            // Bunu nasil yapcam? ref.read ile yapcam. Burdaki yaptigim gibi yapiyorum.
-            // ref.read(stateProviderVar2.notifier).state+=2;
-            // Burda bu sekilde  ref.read(counterStateNotifierProvider.notifier) olmasi gerekiyor ki metotlara erisebilelim
-
-            ref.read(counterStateNotifierProvider.notifier).increment();
-          },
-          child: Text("Counter artir"))
-    ]);
-  }
-}
-
-/// Bask bir provider'i ConsumerWidget 'tan extend ettim. Bunun build metotu WidgetRef diye bir paramerte istiyor.
-class MyTextWidget extends ConsumerWidget {
-  const MyTextWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Text("${ref.watch(myVar1)}");
+    return SplashView();
   }
 }

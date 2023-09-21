@@ -26,8 +26,22 @@ riverpod paketi
 kartal
 flutter lint
 very_good analysis
-00000000000000000000000000000000000000000
+-----------------------------------------
 constantlari olustur
+Login sayfasi ComsumerStatefullWidget'tan turetme
+View Modelde StateNotifierProvider'i yaziyorum.
+Ders 3 Firebase Kullanimi
+Firebase proje baslat
+Flutter CLI ile  config yap
+Cloud Firestore olustur.
+Firebase kodunu main icinde runApp den once calistir. Firebase core da unutma Once bu paketi ekle
+Main icinde firebase baslatmak yerinde baska dosyada yap static metot ile burda cagir.
+HomeView Olustur
+DartJ webseyfasini kullan
+equatable ekle
+Firestore database'den Gelen objeyi parse etmek icin withConverster kullan
+Expections Icin ayri bir sinit olustur,
+
 
 
 
