@@ -1,16 +1,21 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+class AuthView extends StatefulWidget {
+  const AuthView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<AuthView> createState() => _AuthViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _AuthViewState extends State<AuthView> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Center(child: Text("data"),)
+    );
   }
 }
+

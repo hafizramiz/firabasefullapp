@@ -5,7 +5,7 @@ abstract class IdRequiredModel {
 }
 
 abstract class IFirebaseModel<T extends IdRequiredModel> {
-  // Burda abstract sinif olusturdum. Bu siniftan tureyene siniflar bunun icini doldurmak zorundadir
+  // Burda abstract sinif olusturdum. Bu siniftan tureyen siniflar bunun icini doldurmak zorundadir
   // Burdaki metotlar ne yapacaginiz bilmezler. Bunu extend eden siniflarin bunu yazmasi lazim.
   T fromJson(Map<String, dynamic> json); // Bu metot map'i modele ceviriyor.
 
@@ -14,7 +14,6 @@ abstract class IFirebaseModel<T extends IdRequiredModel> {
     // fixme
     value.addEntries([MapEntry('id', snapshot.id)]);
     return fromJson(value);
-
   }
 }
 

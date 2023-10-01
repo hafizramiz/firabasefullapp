@@ -20,7 +20,7 @@ class AnimatedTextWidget extends StatelessWidget {
               .textTheme
               .headlineSmall
               ?.copyWith(
-              color: ColorConstants.white,
+              color: ColorConstants.black,
               fontWeight: FontWeight.bold),
         )
       ],

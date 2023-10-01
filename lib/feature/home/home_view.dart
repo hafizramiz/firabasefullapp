@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebasefullapp/product/models/news.dart';
 import 'package:flutter/material.dart';
 
