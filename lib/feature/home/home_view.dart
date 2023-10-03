@@ -10,18 +10,10 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
-  var myFuture;
-
-  @override
-  void initState() {
-    myFuture = Future.delayed(Duration(seconds: 2));
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference newsCollRef = firestore.collection("news");
+    CollectionReference newsCollRef =  FirebaseFirestore.instance.collection("news");
     final Future<QuerySnapshot<News>> response =
         newsCollRef.withConverter<News>(fromFirestore: (snapshot, _) {
       return News().fromFirestore(snapshot!);
@@ -52,7 +44,8 @@ class _HomeViewState extends State<HomeView> {
                     itemCount: newsList.length,
                     itemBuilder: (BuildContext context,int index){
                       return ListTile(
-                        title: Text("${newsList[index].backgroundImage}"),
+                         title: Text("${newsList[index].backgroundImage}"),
+                        subtitle: Text("${newsList[index].title}"),
                       );
                     });
               }

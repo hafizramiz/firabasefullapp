@@ -8,8 +8,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../product/widgets/animated_text.dart';
 
-final splashScreenProvider =
-    StateNotifierProvider<SplashProvider, SplashState>((ref) {
+
+final splashProvider =
+StateNotifierProvider<SplashProvider, SplashState>((ref) {
   return SplashProvider();
 });
 
@@ -22,22 +23,32 @@ class SplashView extends ConsumerStatefulWidget {
 }
 
 class _SplashViewState extends ConsumerState<SplashView> {
-  
-  @override
-  void initState() {
-   // ref.listen(provider, (previous, next) { })
-    super.initState();
-  }
-  
+
   @override
   Widget build(BuildContext context) {
+    ref.listen(splashProvider, (previous, next) {
+
+      if(next.isRequiredForceuptade ?? false){
+        print("Calisti");
+        showAboutDialog(context: context);
+        return;
+      }
+
+      if(next.isRedicertHome !=null){
+       if(next.isRedicertHome!){
+         // true
+       }else{
+         // false
+       }
+      }
+
+    });
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            //IconConstants.appIcon.toImage,
-            Text("data"),
+            IconConstants.appIcon.toImage,
             AnimatedTextWidget(),
           ],
         ),

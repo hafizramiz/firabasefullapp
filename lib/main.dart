@@ -11,12 +11,6 @@ import 'firebase_options.dart';
 void main() async {
  await AppInit.initApp();
   runApp(const ProviderScope(child: MyApp()));
- print("Weather forecast started!");
- //await deneme();
- await Future.delayed(const Duration(seconds: 3), () {
-   print('One second has passed.');
- });
- print("Sunny");
 }
 
 class MyApp extends StatelessWidget {
@@ -45,6 +39,6 @@ class _MyHomepageState extends State<MyHomepage> {
 
      print("elde ettigim  collref: ${users.runtimeType}");
 
-    return SplashView();
+    return HomeView();
   }
 }
