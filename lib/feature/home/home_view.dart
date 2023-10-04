@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebasefullapp/product/models/news.dart';
 import 'package:flutter/material.dart';
 
+import '../../product/utility/firebase_collections.dart';
+
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
@@ -10,10 +12,14 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-
   @override
   Widget build(BuildContext context) {
-    CollectionReference newsCollRef =  FirebaseFirestore.instance.collection("news");
+// Deneme yapiyorum
+// var a = FirebaseCollections.version.name;
+    print("Enumdaki name: ${FirebaseCollections.version.name}");
+
+    CollectionReference newsCollRef =
+        FirebaseFirestore.instance.collection("news");
     final Future<QuerySnapshot<News>> response =
         newsCollRef.withConverter<News>(fromFirestore: (snapshot, _) {
       return News().fromFirestore(snapshot!);
@@ -33,23 +39,22 @@ class _HomeViewState extends State<HomeView> {
               return Placeholder();
             case ConnectionState.waiting:
             case ConnectionState.active:
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+              return Center(
+                child: CircularProgressIndicator(),
+              );
             case ConnectionState.done:
-
-              if(snapshot.hasData){
-                final newsList=snapshot.data!.docs.map((e) => e.data()).toList();
+              if (snapshot.hasData) {
+                final newsList =
+                    snapshot.data!.docs.map((e) => e.data()).toList();
                 return ListView.builder(
                     itemCount: newsList.length,
-                    itemBuilder: (BuildContext context,int index){
+                    itemBuilder: (BuildContext context, int index) {
                       return ListTile(
-                         title: Text("${newsList[index].backgroundImage}"),
+                        title: Text("${newsList[index].backgroundImage}"),
                         subtitle: Text("${newsList[index].title}"),
                       );
                     });
               }
-
           }
           print("snapshottaki data: ${snapshot.data}");
           print("snapshottaki data tipi: ${snapshot.data.runtimeType}");

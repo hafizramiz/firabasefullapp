@@ -8,7 +8,7 @@ class VersionManager {
 
   bool isNeedUpdate() {
     final deviceNumberSplited = deviceValue.split('.').join();
-    final databseNumberSplited = deviceValue.split('.').join();
+    final databseNumberSplited = databaseValue.split('.').join();
 
     final deviceNumber = int.tryParse(deviceNumberSplited);
     final databaseNumber = int.tryParse(databseNumberSplited);

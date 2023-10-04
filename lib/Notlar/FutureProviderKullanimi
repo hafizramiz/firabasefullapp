@@ -1,4 +1,5 @@
-FutureProvider kullanirken eger parametre gecmek istersek .family kullaniyoruz
+
+NOT: FutureProvider kullanirken eger parametre gecmek istersek .family kullaniyoruz
 
  Bu provider Configuration diye bir model dondurecek. Onu da decode etmis. orasini biliyoruz.
  Sonucta Configuration modelini donduruyor burda.

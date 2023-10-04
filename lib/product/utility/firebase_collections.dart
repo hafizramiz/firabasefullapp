@@ -1,6 +1,9 @@
-enum FirebaseCollections{
-    version;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
- CollectionReference get reference => FirebaseFirestore.instance.collection(name);
- 
+enum FirebaseCollections {
+  // Burdaki version name olarak erisiliyor.
+  version;
+
+  CollectionReference get reference =>
+      FirebaseFirestore.instance.collection(name);
 }

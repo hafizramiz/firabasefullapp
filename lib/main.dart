@@ -5,11 +5,13 @@ import 'package:firebasefullapp/feature/splash/splash_view.dart';
 import 'package:firebasefullapp/product/init/app_init.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import 'firebase_options.dart';
 
 void main() async {
- await AppInit.initApp();
+  await AppInit.initApp();
+  PackageInfo packageInfo = await PackageInfo.fromPlatform();
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -37,8 +39,8 @@ class _MyHomepageState extends State<MyHomepage> {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     CollectionReference users = firestore.collection('users');
 
-     print("elde ettigim  collref: ${users.runtimeType}");
+    print("elde ettigim  collref: ${users.runtimeType}");
 
-    return HomeView();
+    return SplashView();
   }
 }

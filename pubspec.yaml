@@ -37,12 +37,13 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_riverpod: ^2.3.7
   firebase_core: ^2.16.0
-  kartal: ^3.0.1
   cloud_firestore: ^4.9.2
   firebase_storage: ^11.2.7
   equatable: ^2.0.5
   animated_text_kit: ^4.2.2
   firebase_ui_auth: ^1.7.0
+  kartal: ^3.0.1
+  package_info_plus: ^4.1.0
 
 dev_dependencies:
   flutter_test:
