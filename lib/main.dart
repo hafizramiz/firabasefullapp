@@ -1,17 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebasefullapp/feature/home/home_view.dart';
+import 'package:firebasefullapp/feature/signup/sign_up_view.dart';
 import 'package:firebasefullapp/feature/splash/splash_view.dart';
 import 'package:firebasefullapp/product/init/app_init.dart';
+import 'package:firebasefullapp/product/widgets/name_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import 'firebase_options.dart';
+import 'dart:math';
 
 void main() async {
   await AppInit.initApp();
-  PackageInfo packageInfo = await PackageInfo.fromPlatform();
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -36,11 +38,6 @@ class MyHomepage extends StatefulWidget {
 class _MyHomepageState extends State<MyHomepage> {
   @override
   Widget build(BuildContext context) {
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
-    CollectionReference users = firestore.collection('users');
-
-    print("elde ettigim  collref: ${users.runtimeType}");
-
-    return SplashView();
+    return SignUpView();
   }
 }

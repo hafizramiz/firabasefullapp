@@ -18,7 +18,8 @@ class SplashView extends ConsumerStatefulWidget {
   ConsumerState createState() => _SplashViewState();
 }
 
-class _SplashViewState extends ConsumerState<SplashView> {
+class _SplashViewState extends ConsumerState<SplashView>
+    with _MixinSplashViewListen {
   @override
   void initState() {
     ref.read(splashProvider.notifier).checkVersion();
@@ -27,6 +28,26 @@ class _SplashViewState extends ConsumerState<SplashView> {
 
   @override
   Widget build(BuildContext context) {
+    listen();
+
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconConstants.appIcon.toImage,
+            AnimatedTextWidget(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+mixin _MixinSplashViewListen on ConsumerState<SplashView> {
+  // Listeni burda yap okunurlugu artirsin
+
+  void listen() {
     ref.listen(splashProvider, (previous, next) {
       if (next.isRequiredForceuptade ?? false) {
         print("next.isRequiredForceuptade: ${next.isRequiredForceuptade}");
@@ -37,29 +58,14 @@ class _SplashViewState extends ConsumerState<SplashView> {
 
       if (next.isRedicertHome != null) {
         if (next.isRedicertHome!) {
-          // true
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => HomeView(),
             ),
           );
-        } else {
-          // false
-        }
+        } else {}
       }
     });
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconConstants.appIcon.toImage,
-            AnimatedTextWidget(),
-            //Text(ref.watch(splashProvider).deneme!)
-          ],
-        ),
-      ),
-    );
   }
 }

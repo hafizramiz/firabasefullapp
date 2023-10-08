@@ -16,12 +16,6 @@ final splashProvider =
 class SplashProvider extends StateNotifier<SplashState> {
   SplashProvider() : super(SplashState());
 
-  Future<String> getDeviceVersion() async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    String version = packageInfo.version;
-    return version;
-  }
-
   Future<void> checkVersion() async {
     final String appVersion = await getDeviceVersion();
     print("uygulama versionu:$appVersion");
@@ -61,14 +55,20 @@ class SplashProvider extends StateNotifier<SplashState> {
 
     return response.data()?.number;
   }
+
+  Future<String> getDeviceVersion() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    String version = packageInfo.version;
+    return version;
+  }
 }
 
+// Burda Statelerimi tutcam
 class SplashState extends Equatable {
   final bool? isRequiredForceuptade;
   final bool? isRedicertHome;
-  final String? deneme;
 
-  SplashState({this.deneme, this.isRequiredForceuptade, this.isRedicertHome});
+  SplashState({this.isRequiredForceuptade, this.isRedicertHome});
 
   @override
   List<Object?> get props => [isRequiredForceuptade, isRedicertHome];

@@ -6,7 +6,7 @@ final myVar1 = Provider<String>((ref) {
   return " Ikinci String";
 });
 
-final stateProviderVar = StateProvider((ref) {
+final stateProviderVar = StateProvider<String>((ref) {
   // ref deyince aklimiza gelmesi gereken: Baska providerlara erismek icin gerekli olan aractir.
   // burda baska provideri okuyabilirim.
   // Onceki soyledigimizi tasdikler niteliktedir. Yani bir veriyi elde ederken baska bir
