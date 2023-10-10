@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kartal/kartal.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-
 import '../../product/widgets/animated_text.dart';
 
 class SplashView extends ConsumerStatefulWidget {
@@ -44,8 +43,9 @@ class _SplashViewState extends ConsumerState<SplashView>
   }
 }
 
+// Listeni burda yap okunurlugu artirsin
+
 mixin _MixinSplashViewListen on ConsumerState<SplashView> {
-  // Listeni burda yap okunurlugu artirsin
 
   void listen() {
     ref.listen(splashProvider, (previous, next) {

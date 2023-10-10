@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebasefullapp/product/enums/platfrom.dart';
+import 'package:firebasefullapp/product/enums/platform_find.dart';
 import 'package:firebasefullapp/product/models/version.dart';
 import 'package:firebasefullapp/product/utility/firebase_collections.dart';
 import 'package:firebasefullapp/product/utility/version_manager.dart';
@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+// Global provider yaptim.
 final splashProvider =
     StateNotifierProvider<SplashProvider, SplashState>((ref) {
   return SplashProvider();
@@ -21,6 +22,7 @@ class SplashProvider extends StateNotifier<SplashState> {
     print("uygulama versionu:$appVersion");
     final dbValue = await getVersionFromDb();
 
+    print("db value: $dbValue");
     if (dbValue == null || dbValue.isEmpty) {
       // Burda state'i kopyaladim yeniden state olusturdum ki Ui tarafinda dinleyiciyi uyarsin. YOksa state'i degistirince uyarmiyor.
       //ref.listen ile dinledigimde gecerlidir bu dedigim.

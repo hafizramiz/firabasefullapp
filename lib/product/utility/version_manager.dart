@@ -8,14 +8,14 @@ class VersionManager {
 
   bool isNeedUpdate() {
     final deviceNumberSplited = deviceValue.split('.').join();
-    final databseNumberSplited = databaseValue.split('.').join();
+    final databaseNumberSplited = databaseValue.split('.').join();
 
     final deviceNumber = int.tryParse(deviceNumberSplited);
-    final databaseNumber = int.tryParse(databseNumberSplited);
+    final databaseNumber = int.tryParse(databaseNumberSplited);
 
     if (deviceNumber == null || databaseNumber == null) {
       throw VersionCustomException(
-          "$deviceNumberSplited or $databseNumberSplited  is not valid for parse");
+          "$deviceNumberSplited or $databaseNumberSplited  is not valid for parse");
     }
     return deviceNumber < databaseNumber;
   }

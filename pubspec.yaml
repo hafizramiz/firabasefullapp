@@ -43,7 +43,6 @@ dependencies:
   animated_text_kit: ^4.2.2
   kartal: ^3.0.1
   package_info_plus: ^4.1.0
-  formz: ^0.6.1
 
 dev_dependencies:
   flutter_test:
