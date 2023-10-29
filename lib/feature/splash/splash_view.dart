@@ -1,5 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:firebasefullapp/feature/home/home_view.dart';
+import 'package:firebasefullapp/feature/onboard/onboard_view.dart';
 import 'package:firebasefullapp/feature/splash/splash_provider.dart';
 import 'package:firebasefullapp/product/constants/color_constant.dart';
 import 'package:firebasefullapp/product/constants/string_constant.dart';
@@ -61,7 +62,7 @@ mixin _MixinSplashViewListen on ConsumerState<SplashView> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => HomeView(),
+              builder: (context) => OnBoardView(),
             ),
           );
         } else {}
