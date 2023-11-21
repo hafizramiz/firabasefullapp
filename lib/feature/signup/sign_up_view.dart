@@ -24,13 +24,15 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen<SignUpState>(signUpProvider, (previous, current) {
-      if (current.isLoading == true) {
-        // Loading sheer goster
-      } else if (current.isLoading == false) {
-        Navigator.of(context).pop();
-      } else if (current.error != null) {
-        // ErrorDialog.show(context).
+    ref.listen<SignUpState>(signUpProvider, (previous, next) {
+      if (next.error == null) {
+        if (next.isLoading == true) {
+          LoadingDialog.show(context);
+        } else if (next.isLoading == false) {
+          Navigator.of(context).pop();
+        }
+      } else {
+        ErrorDialog.show(context, "${next.error}");
       }
     });
     return Scaffold(
@@ -42,33 +44,45 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
             children: [
               Text("Sign up View"),
               TextFormField(
-                  // validator: (value) {
-                  //   if (value == null || value.isEmpty) {
-                  //     return 'Please enter some text';
-                  //   }
-                  //   return null;
-                  // },
-                  ),
-              TextFormField(
                 controller: _emailController,
+                autovalidateMode: AutovalidateMode.always,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  } else if (value.length < 5) {
+                    return "Name should be at least 5 character";
+                  }
+                  return null;
+                },
               ),
               TextFormField(
+                autovalidateMode: AutovalidateMode.always,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  } else if (value.length < 5) {
+                    return "Name should be at least 4 character";
+                  }
+                  return null;
+                },
                 controller: _passwordController,
               ),
               ElevatedButton(
-                onPressed: () async {
-                  // // Burda validate degilse null yap.
-                  // if (_formKey.currentState!.validate()) {
-                  //   print("validate basarili");
-                  //   // Burda ref.read(signUpprovider.notifier).signUpMethod cagircam
-                  //
-                  // }
-                  //  await ref.read(signUpProvider.notifier).signUpWithEmailAndPassword(
-                  //     _emailController.text, _passwordController.text);
-                  //ErrorDialog.show(context,"Example Error");
-                  LoadingDialog.show(context);
-                  print("Sign up yapildi mi?");
-                },
+                onPressed: _formKey.currentState!.validate()
+                    ? () {
+                        // // Burda validate degilse null yap.
+                        // if (_formKey.currentState!.validate()) {
+                        //   print("validate basarili");
+                        //   // Burda ref.read(signUpprovider.notifier).signUpMethod cagircam
+                        //
+                        // }
+                        ref
+                            .read(signUpProvider.notifier)
+                            .signUpWithEmailAndPassword(
+                              _emailController.text,
+                                _passwordController.text);
+                      }
+                    : null,
                 child: Text("Sign Up"),
               )
             ],

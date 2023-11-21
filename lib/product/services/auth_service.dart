@@ -10,13 +10,11 @@ import '../models/auth_user.dart';
 class AuthService {
   final _firebaseAuth = FirebaseAuth.instance;
   final _googleSignIn = GoogleSignIn.standard();
-  int deneme = 10;
 
   Stream<AuthUser> get user {
     return _firebaseAuth.authStateChanges().map((firebaseUser) {
       // Eger firebaseUser null ise  bos nesne dondur.Bu sayede Sign in sayfasina yonlendir
       // Eger null degile iceri girmis kullaniciyi dondur. Bu sayede kullaniciyi iceri at
-      deneme = 20;
       return firebaseUser == null
           ? AuthUser.empty
           : AuthUser(
