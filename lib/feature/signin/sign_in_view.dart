@@ -1,6 +1,8 @@
 import 'package:firebasefullapp/feature/home/home_view.dart';
 import 'package:firebasefullapp/feature/signin/sign_in_notifier.dart';
 import 'package:firebasefullapp/feature/signup/sign_up_view.dart';
+import 'package:firebasefullapp/product/widgets/error_dialog.dart';
+import 'package:firebasefullapp/product/widgets/loading_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -17,7 +19,18 @@ class _SignInViewState extends ConsumerState<SignInView> {
 
   @override
   Widget build(BuildContext context) {
-    final signInState = ref.watch(signInProvider);
+    ref.listen<SignInState>(signInProvider, (previous, next) {
+      if (next.error == null) {
+        if (next.isLoading == true) {
+          LoadingDialog.show(context);
+        } else if (next.isLoading == false) {
+          Navigator.of(context).pop();
+        }
+      } else {
+        ErrorDialog.show(context, "${next.error}");
+      }
+    });
+
     return Scaffold(
       body: Form(
           child: Column(
