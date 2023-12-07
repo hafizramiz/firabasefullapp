@@ -33,7 +33,7 @@ To run this app locally, follow these steps:
 
 ## 📸 Screenshots
 
-I
+
 ## 🤓 Author
 
 I'm Hafiz Ramiz, a passionate Mobile Developer with a love for Flutter. Connect with me on [LinkedIn](your-linkedin-profile) and [GitHub](https://github.com/your-username).
