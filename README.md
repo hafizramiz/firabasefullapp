@@ -8,12 +8,11 @@ A Flutter project that showcases Firebase integration, Riverpod state management
 
 ## ✨ Features
 
-- **Easy Image Sharing:** 
-** Firebase integration for backend services.
-** State management using Riverpod.
-** Animated text functionality.
-** Force update mechanism.
-** Splash screen implementation.
+- **Firebase integration for backend services:**
+- **State management using Riverpod:**
+- **Animated text functionality:**
+- **Force update mechanism:**
+- **Splash screen implementation:**
 
 ## Technologies Used
 
@@ -28,14 +27,13 @@ A Flutter project that showcases Firebase integration, Riverpod state management
 
 To run this app locally, follow these steps:
 
-1. Clone this repository: `git clone https://github.com/your-username/Flutter-Share-Friday-Messages.git`
-2. Navigate to the project folder: `cd Flutter-Share-Friday-Messages`
+1. Clone this repository: `https://github.com/hafizramiz/firabasefullapp.git`
+2. Navigate to the project folder: `cd your-repo`
 3. Run the app: `flutter run`
 
 ## 📸 Screenshots
 
-Include screenshots or GIFs of your app in action to give visitors a quick preview.
-
+I
 ## 🤓 Author
 
 I'm Hafiz Ramiz, a passionate Mobile Developer with a love for Flutter. Connect with me on [LinkedIn](your-linkedin-profile) and [GitHub](https://github.com/your-username).
